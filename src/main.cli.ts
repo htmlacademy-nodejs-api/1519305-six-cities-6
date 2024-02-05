@@ -4,14 +4,13 @@ import { CLIApplication, GenerateCommand, HelpCommand, ImportCommand, VersionCom
 function bootstrap() {
   const cliApplication = new CLIApplication();
   cliApplication.registerCommands([
+    new GenerateCommand(),
     new HelpCommand(),
     new VersionCommand(),
     new ImportCommand(),
-    new GenerateCommand(),
   ]);
 
   cliApplication.processCommand(process.argv);
 }
 
 bootstrap();
-
