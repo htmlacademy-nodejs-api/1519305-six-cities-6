@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { OfferGenerator } from './offer-generator.interface.js';
-import { MockServerData, Property, Conveniences } from '../../types/index.js';
+import { MockServerData, Property, Facility } from '../../types/index.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../helpers/index.js';
 
 const FIRST_WEEK_DAY = 1;
@@ -44,13 +44,13 @@ export class TSVOfferGenerator implements OfferGenerator {
     const roomsCount = generateRandomValue(MIN_ROOM, MAX_ROOM);
     const guestsCount = generateRandomValue(MIN_GUESTS, MAX_GUESTS);
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE);
-    const facilities = getRandomItems(Object.values(Conveniences));
+    const facilities = getRandomItems(Object.values(Facility));
     const name = getRandomItem<string>(this.mockData.names);
     const email = getRandomItem<string>(this.mockData.emails);
     const avatar = getRandomItem<string>(this.mockData.avatarsPath);
-    const password = getRandomItem<string>(this.mockData.passwords);
+    //const password = getRandomItem<string>(this.mockData.passwords);
     const isPro = getRandomItem(['true', 'false']);
-    const author = [name, email, avatar, password, isPro];
+    const author = [name, email, avatar, isPro];
     const commentsCount = generateRandomValue(MIN_COMMENTS, MAX_COMMENTS);
     const latitude = generateRandomValue(MIN_LOCATION, MAX_LOCATION, LOCATION_FLOAT);
     const longitude = generateRandomValue(MIN_LOCATION, MAX_LOCATION, LOCATION_FLOAT);
