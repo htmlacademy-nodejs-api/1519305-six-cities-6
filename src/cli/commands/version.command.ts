@@ -36,7 +36,6 @@ export class VersionCommand implements Command {
     return '--version';
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async execute(..._parameters: string[]): Promise<void> {
     try {
       const version = this.readVersion();

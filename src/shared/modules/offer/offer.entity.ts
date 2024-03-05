@@ -1,6 +1,6 @@
 import { defaultClasses, getModelForClass, modelOptions, prop, Ref, Severity } from '@typegoose/typegoose';
-import { DescriptionLength, GuestsNumber, OfferTitleLength, PriceValue, RatingValue, RoomsNumber } from '../../const/index.js';
-import { Conveniences, City, Property, Location } from '../../types/index.js';
+import { DescriptionLength, GuestsNumber, OfferTitleLength, PriceValue, RoomsNumber } from '../../const/index.js';
+import { Goods, City, Property, Location } from '../../types/index.js';
 import { UserEntity } from '../user/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
@@ -34,7 +34,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     require: true,
     default: new Date(),
   })
-  public publishedDate!: Date;
+  public offerDate!: Date;
 
   @prop({
     type: () => String,
@@ -53,24 +53,23 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     require: true,
     default: [],
   })
-  public photos!: string[];
+  public images!: string[];
 
   @prop({
     require: true,
     default: false,
   })
-  public premium!: boolean;
+  public isPremium!: boolean;
 
   @prop({
     require: true,
     default: false,
   })
-  public isFavorite!: boolean;
+  public isFavorite?: boolean;
 
   @prop({
     require: true,
-    min: RatingValue.Min,
-    max: RatingValue.Max,
+    default: 0,
   })
   public rating!: number;
 
@@ -104,17 +103,17 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     type: () => [String],
-    enum: Conveniences,
+    enum: Goods,
     require: true,
     default: []
   })
-  public conveniences!: Conveniences[];
+  public goods!: Goods[];
 
   @prop({
     ref: UserEntity,
     require: true,
   })
-  public author!: Ref<UserEntity>;
+  public userId!: Ref<UserEntity>;
 
   @prop({
     default: 0,
