@@ -1,4 +1,4 @@
-import { City, Conveniences, Offer, Property } from '../types/index.js';
+import { City, Goods, Offer, Property, UserType } from '../types/index.js';
 
 export function createOffer(data: string): Offer {
   const [title,
@@ -14,38 +14,37 @@ export function createOffer(data: string): Offer {
     rooms,
     guests,
     price,
-    facilities,
+    goods,
     name,
     email,
     avatar,
-    password,
-    isPro,
-    commentsCount,
+    userType,
+    commentCount,
     location] = data.replace('\n', '').split('\t');
 
   return {
     title,
     description,
-    publishedDate: new Date(date),
+    offerDate: new Date(date),
     city: city as City,
     preview,
-    photos: photos.split(';'),
-    premium: premium === 'true',
-    favorite: favorite === 'true',
+    images: photos.split(';'),
+    isPremium: premium === 'true',
+    isFavorite: favorite === 'true',
     rating: Number.parseFloat(rating),
     property: property as Property,
     roomsCount: Number.parseInt(rooms, 10),
     guestsCount: Number.parseInt(guests, 10),
     price: Number.parseInt(price, 10),
-    facilities: facilities.split(';').map((facility) => facility as Conveniences),
-    author: {
+    goods: goods.split(';').map((good) => good as Goods),
+    user: {
       name,
       email,
       avatar,
-      password,
-      isPro: isPro === 'true',
+      userType: userType as UserType,
+      favorites: [],
     },
-    commentsCount: Number.parseInt(commentsCount, 10),
+    commentCount: Number.parseInt(commentCount, 10),
     location: {
       latitude: Number.parseFloat(location.split(';')[0]),
       longitude: Number.parseFloat(location.split(';')[1])

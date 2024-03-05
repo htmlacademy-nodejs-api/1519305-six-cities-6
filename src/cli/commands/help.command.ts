@@ -6,7 +6,6 @@ export class HelpCommand implements Command {
     return '--help';
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async execute(..._parameters: string[]): Promise<void> {
     console.info(chalk.bold('Программа для подготовки данных для REST API сервера.'));
     console.info(chalk.blue('Пример:'), chalk.green('cli.js --<command> [--arguments]'));
