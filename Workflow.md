@@ -10,15 +10,68 @@ npm install
 
 Команда запустит процесс установки зависимостей проекта из **npm**.
 
-### Сценарии
+Переменные окружения:
 
-В `package.json` предопределено несколько сценариев.
+```bash
+PORT=number - порт для входящих подключений к серверу
+SALT=string - соль для хеширования пароля
+DB_HOST=string - адресс для подключения к БД
+DB_USER=string - имя пользователя для подключения к БД
+DB_PASSWORD=string - пароль для подключения к БД
+DB_PORT=string - порт для подключения к БД
+DB_NAME=string - имя БД
+UPLOAD_DIRECTORY=string - дирректория для загрузки статики
+JWT_SECRET=string - соль для создания токена
+```
+Пример в файле .env-example
+
+#### Команды
+
+Команда поднимает контейнер с базой данных.
+
+```bash
+docker compose up -d
+```
+
+Команда запуска тестового сервера:
 
 ```bash
 npm run mock:server
 ```
 
-Запустит JSON сервер
+Команда генерации 100 тестовых данных в файл **.tsv**.
+
+```bash
+npm run cli -- --generate 100 ./mock/mock-data.tsv http://localhost:3123/api
+
+npm run ts ./src/main.cli.ts -- --generate 100 ./mock/mock-data.tsv http://localhost:3123/api
+```
+
+Команда импорта тестовых данных из файла **.tsv** в БД.
+
+```bash
+npm run cli -- --import ./mock/mock-data.tsv db_user db_password localhost db_name _salt
+
+npm run ts ./src/main.cli.ts -- --import ./mock/mock-data.tsv db_user db_password localhost db_name _salt
+```
+
+### Сценарии
+
+В `package.json` предопределено несколько сценариев.
+
+#### Запустить cli команды
+
+```bash
+npm run cli -- --<commandName> [--arguments]
+```
+Вызовет cli команду c с переданными аргументами Подробнее о доступные командах: npm run cli -- --help
+
+#### Запустить мок-сервер
+
+```bash
+npm run mock:server
+```
+Запустит сервер с набором моковых данных на порту 3123
 
 #### Скомпилировать проект
 
@@ -68,6 +121,12 @@ npm run ts -- <Путь к модулю с ts-кодом>
 
 ```bash
 npm start
+```
+
+#### Запустить проект в dev режиме
+
+```bash
+npm run start:dev
 ```
 
 В процессе запуска проекта будет выполнен процесс «Сборки проекта» и запуска результирующего кода.
